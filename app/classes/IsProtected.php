@@ -9,6 +9,6 @@ class IsProtected{
             throw new Exception("Esta ação não é possível com o seu nível de acesso atual.");
             die();
         }
-        return header("location:". URL_BASE);
+        return redirect(URL_BASE);
     }
 }

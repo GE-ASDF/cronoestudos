@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\classes\BlockNotAdmin;
 use app\classes\IsAdmin;
 use app\classes\IsProtected;
 use app\classes\NotLogged;
@@ -12,7 +11,7 @@ class UsuariosController extends Controller{
 
     public function __construct()
     {   
-        $isAdmin = IsAdmin::isAdmin(0,1);
+        $isAdmin = IsAdmin::isAdmin($_SESSION[SESSION_LOGIN]->colaborador,1);
         NotLogged::notLogged();
         if(!$isAdmin) IsProtected::isProtected();
     }
