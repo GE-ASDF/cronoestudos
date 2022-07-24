@@ -2,5 +2,5 @@
 namespace app\interfaces;
 
 interface ActiveRecordInterfaceExecute{
-    public function execute(ActiveRecordInterface $activeRecordInterfaceExecute);
+    public function execute(ActiveRecordInterface $activeRecordInterface);
 }
