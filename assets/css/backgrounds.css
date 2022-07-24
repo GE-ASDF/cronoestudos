@@ -1,0 +1,15 @@
+.bg-blue{
+    background-color: var(--bg-blue);
+}
+
+:root{
+    --bg-blue: rgb(20, 12, 122);
+}
+
+.bg-white{
+    background-color: var(--bg-white);
+}
+
+.color-white{
+    color:var(--bg-white);
+}

@@ -1,0 +1,40 @@
+@media (max-width:1040px){
+    .main-content{
+        grid-template-columns: repeat(2, 450px);
+    }
+}
+@media (max-width:940px){
+    .main-content{
+        grid-template-columns: repeat(2, 400px);
+    }
+}
+
+@media (max-width:840px){
+    .header-options.center{
+        display: none;
+    }
+    .header-options.right{
+        display: flex;
+        align-self: center;
+        justify-self: flex-end;
+    }
+    .main-content{
+        grid-template-columns: repeat(2, 350px);
+    }
+}
+
+@media (max-width:740px){
+    .base{
+        top:-200px;
+    }
+    .main-content{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (max-width:540px){
+    .formulario-login{
+        width: 100%;
+    }
+}
