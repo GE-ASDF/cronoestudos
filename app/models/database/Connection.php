@@ -16,8 +16,8 @@ class Connection{
                 static::$pdo = new PDO("mysql:dbname=".BANCO.";host=".SERVIDOR,USUARIO,SENHA, [
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
                 ]);
-                return static::$pdo;
             }
+            return static::$pdo;
 
         }catch(PDOException $e){
             var_dump($e->getMessage());

@@ -2,10 +2,12 @@
 namespace app\controllers;
 
 use app\classes\Flash;
+use app\classes\Validacao;
 use app\models\Login;
 use app\core\Controller;
 use app\models\Activerecord;
 use app\models\FindBy;
+use app\models\Insert;
 use app\models\tables\Usuarios;
 
 class LoginController extends Controller{
@@ -15,18 +17,28 @@ class LoginController extends Controller{
         $this->load("login", $dados);
     }
     public function logar(){
-        $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
-        $senha = strip_tags($_POST["senha"]);
+        // $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
+        // $senha = strip_tags($_POST["senha"]);
+        
+        $validate = (new Validacao)::validacao([
+            "email" => "required|email|existe:usuarios",
+            "senha" => "required"
+        ]);
+        
+
+        if(!$validate){
+            return redirect("login");
+        }
 
         $objUsuario = new Usuarios;
-        $usuario = $objUsuario->execute(new FindBy(field:"email", value:$email));
+        $usuario = $objUsuario->execute(new FindBy(field:"email", value:$validate["email"]));
 
-        if($usuario->email != $email){
+        if($usuario->email != $validate["email"]){
             setFlash("email", "E-mail não cadastrado.");
             return header("location:". URL_BASE ."login");
         }
 
-        $passwordMatch = password_verify($senha, $usuario->senha);
+        $passwordMatch = password_verify($validate["senha"], $usuario->senha);
         if(!$passwordMatch){
             setFlash("senha", "Senha inválida.");
             return header("location:". URL_BASE ."login");
@@ -35,9 +47,46 @@ class LoginController extends Controller{
         $_SESSION[SESSION_LOGIN] = $usuario;
         return header("location:" . URL_BASE);
    }
+
+   public function cadastrar(){
+        if(!$_POST){
+            return redirect(URL_BASE);
+        }
+
+        $cadastrar = new Usuarios;
+    
+        $validate = (new Validacao)::validacao([
+            "nome"=>"required",
+            "sobrenome"=>"required",
+            "email"=>"required|unique:usuarios",
+            "senha"=>"required"
+        ]);
+
+        if(!$validate){
+            setFlash("message", "Tente realizar o cadastro novamente.");
+            return redirect(URL_BASE);
+        }
+        if($validate){
+            $cadastrar->nome = $validate["nome"];
+            $cadastrar->sobrenome = $validate["sobrenome"];
+            $cadastrar->email = $validate["email"];
+            $cadastrar->senha = password_hash($validate["senha"], PASSWORD_DEFAULT);
+            $cadastrado = $cadastrar->execute(new Insert($validate));
+            
+            if($cadastrado){
+                setFlash("message", "O seu cadastro foi realizado com sucesso. Faça login agora.");
+                return redirect(URL_BASE);
+            }else{
+                setFlash("message", "O seu cadastro não foi realizado. Tente novamente.");
+                return redirect(URL_BASE);
+            }    
+
+        }
+   }
+
    public function logout(){
         if(isset($_SESSION[SESSION_LOGIN])){
-            session_destroy();
+            unset($_SESSION[SESSION_LOGIN]);
         }
         return header("location:" . URL_BASE . "login");
    }

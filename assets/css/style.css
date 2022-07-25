@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&family=Roboto:wght@400;500;700&display=swap');
+/* IMPORTAÇÃO DO CSS GLOBAL */
+
+@import "global/global.css";
+
+@import "login/login.css";
+
+@import "animacoes/simple-anime.css";
+
+@import "modal/modal.css";

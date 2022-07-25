@@ -22,6 +22,11 @@ abstract class Activerecord implements ActiveRecordInterface{
     {
         return $this->table;
     }
+
+    public function getAtributos(){
+        return $this->atributos;
+    }
+
     public function __set($atributos, $valor)
     {
         $this->atributos[$atributos] = $valor;

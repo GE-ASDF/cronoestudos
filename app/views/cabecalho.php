@@ -15,7 +15,7 @@
                         </nav>
                     </div>
                     <div class="header-options right">
-                        <i class="large material-icons menu">menu</i>
+                        <i class="medium material-icons menu" style="color:#fff">menu</i>
                         <nav class="nav-header">
                             <ul class="color-white">
                                 <li><i class="material-icons">home<a href="">Inicial</a></i></li>

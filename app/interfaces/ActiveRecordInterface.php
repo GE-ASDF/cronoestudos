@@ -8,4 +8,5 @@ interface ActiveRecordInterface{
     public function __set($atributos, $valor);
     public function execute(ActiveRecordInterfaceExecute $activeRecordExecuteInterface);
     public function __get($atributos);
+    public function getAtributos();
 }
