@@ -17,6 +17,10 @@
     align-self: flex-start;
     margin:10px;
     font-size: 32px;
+    color:#fff;
+}
+.modal .login-image .title{
+    color:#fff;
 }
 .modal form{
     background-color: #232323;

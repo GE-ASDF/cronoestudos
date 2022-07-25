@@ -7,7 +7,7 @@
     <meta name="description" content="Página de Login do cronoestudos">
     <title>Login</title>
     <link rel="stylesheet" href="<?php echo URL_BASE ?>assets/css/style.css">
-    <link rel="stylesheet" href="<?php echo URL_BASE ?>assets/css/modal/modal.css">
+    <!-- <link rel="stylesheet" href="<?php echo URL_BASE ?>assets/css/modal/modal.css"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
