@@ -9,6 +9,7 @@ use app\models\Activerecord;
 use app\models\FindBy;
 use app\models\Insert;
 use app\models\tables\Usuarios;
+use app\models\Usuarios as ModelsUsuarios;
 
 class LoginController extends Controller{
 
@@ -49,9 +50,6 @@ class LoginController extends Controller{
    }
 
    public function cadastrar(){
-        if(!$_POST){
-            return redirect(URL_BASE);
-        }
 
         $cadastrar = new Usuarios;
     
@@ -61,11 +59,14 @@ class LoginController extends Controller{
             "email"=>"required|unique:usuarios",
             "senha"=>"required"
         ]);
+        
 
         if(!$validate){
-            setFlash("message", "Tente realizar o cadastro novamente.");
-            return redirect(URL_BASE);
+            echo "erro";
+            // setFlash("message", "Tente realizar o cadastro novamente.");
+            // return redirect(URL_BASE);
         }
+        
         if($validate){
             $cadastrar->nome = $validate["nome"];
             $cadastrar->sobrenome = $validate["sobrenome"];
@@ -74,15 +75,17 @@ class LoginController extends Controller{
             $cadastrado = $cadastrar->execute(new Insert($validate));
             
             if($cadastrado){
+                echo "cadastrado";
                 setFlash("message", "O seu cadastro foi realizado com sucesso. Faça login agora.");
-                return redirect(URL_BASE);
+          
             }else{
+                echo "erro";
                 setFlash("message", "O seu cadastro não foi realizado. Tente novamente.");
-                return redirect(URL_BASE);
+              
             }    
 
         }
-   }
+    }
 
    public function logout(){
         if(isset($_SESSION[SESSION_LOGIN])){

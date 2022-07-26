@@ -66,8 +66,10 @@
 <div class="modal">
 
     <div class="login-form">
-        
-        <form action="<?php echo URL_BASE . "login/cadastrar" ?>" method="POST">
+        <div class="mensagem">
+            
+        </div>
+        <form id="cadastrarUsuario">
 
             <div class="close-modal">
                 <i class="material-icons">close</i>
@@ -88,23 +90,24 @@
         
             <div class="form-item fadeInDown" data-anime="250">
             <label for="email">E-mail</label>
-                <input type="email" name="email" id="email" class="form-control">
+                <input type="email" name="email" class="form-control">
                 <?php echo getFlash("email") ?>
             </div>
                         
             <div class="form-item fadeInDown" data-anime="250">
                 <label for="password">Senha</label>
-                <input type="password" name="senha" id="password" class="form-control">
+                <input type="password" name="senha" class="form-control">
                 <?php echo getFlash("senha") ?>
             </div>
                         
             <div class="form-item">
-                <input type="submit" value="Cadastrar" class="btn btn-primary">
+                <input type="submit" value="Cadastrar" id="cadastrar-btn" class="btn btn-primary">
             </div>
         </form>
     </div>
 </div>
-    
+    <script src="<?php echo URL_BASE ?>app/views/assets/xhttp.js"></script>
+    <script src="<?php echo URL_BASE ?>app/views/assets/cadastrar.js"></script>
     <script src="<?php echo URL_BASE ?>assets/js/simple-anime.js"></script>
     <script src="<?php echo URL_BASE ?>assets/js/script.js"></script>
     <script src="<?php echo URL_BASE ?>assets/js/modal.js"></script>

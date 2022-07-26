@@ -43,7 +43,7 @@ class Validacao{
     }
 
     private static function required($field){
-        if($_POST[$field] === ''){
+        if(!isset($_POST[$field]) || $_POST[$field] === ''){
             setFlash($field, "O campo {$field} é obrigatório");
             return false;
         }
