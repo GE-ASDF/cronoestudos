@@ -47,7 +47,7 @@ class Validacao{
             setFlash($field, "O campo {$field} é obrigatório");
             return false;
         }
-        return filter_input(INPUT_POST, $field, FILTER_SANITIZE_EMAIL);
+        return strip_tags($_POST[$field]);
     }
 
     private static function email($field){

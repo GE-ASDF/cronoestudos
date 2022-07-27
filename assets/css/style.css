@@ -10,3 +10,8 @@
 @import "modal/modal.css";
 
 @import "alert/alert.css";
+
+.mensagem{
+    z-index: 999999;
+    margin:0 auto;
+}

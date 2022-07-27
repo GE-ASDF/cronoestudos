@@ -62,7 +62,7 @@ class LoginController extends Controller{
         
 
         if(!$validate){
-            echo "erro";
+            echo json_encode(0);
             // setFlash("message", "Tente realizar o cadastro novamente.");
             // return redirect(URL_BASE);
         }
@@ -72,16 +72,13 @@ class LoginController extends Controller{
             $cadastrar->sobrenome = $validate["sobrenome"];
             $cadastrar->email = $validate["email"];
             $cadastrar->senha = password_hash($validate["senha"], PASSWORD_DEFAULT);
+
             $cadastrado = $cadastrar->execute(new Insert($validate));
             
             if($cadastrado){
-                echo "cadastrado";
-                setFlash("message", "O seu cadastro foi realizado com sucesso. Faça login agora.");
-          
+                echo json_encode(1);
             }else{
-                echo "erro";
-                setFlash("message", "O seu cadastro não foi realizado. Tente novamente.");
-              
+                echo json_encode(0);
             }    
 
         }

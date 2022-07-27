@@ -1,30 +1,42 @@
-<section class="header-content">
-                <div class="header auto-container container">
-                    <div class="header-options left color-white">
-                        <span><a href="">CRONOESTUDOS</a></span> 
-                    </div>
-                    <div class="header-options center">
-                        <nav class="nav-header">
-                            <ul class="color-white">
-                                <li><i class="material-icons">home<a href="">Inicial</a></i></li>
-                                <li><i class="material-icons">school<a href="">Meus cursos</a></i></li>
-                                <li><i class="material-icons">person<a href="">Meu perfil</a></i></li>
-                                <li><i class="material-icons">schedule<a href="">Grade</a></i></li>
-                                <li><i class="material-icons">exit_to_app<a href="<?php echo URL_BASE . "login/logout" ?>">Sair</a></i></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="header-options right">
-                        <i class="medium material-icons menu" style="color:#fff">menu</i>
-                        <nav class="nav-header">
-                            <ul class="color-white">
-                                <li><i class="material-icons">home<a href="">Inicial</a></i></li>
-                                <li><i class="material-icons">school<a href="">Meus cursos</a></i></li>
-                                <li><i class="material-icons">person<a href="">Meu perfil</a></i></li>
-                                <li><i class="material-icons">schedule<a href="">Grade</a></i></li>
-                                <li><i class="material-icons">exit_to_app<a href="<?php echo URL_BASE . "login/logout" ?>">Sair</a></i></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </section>
+<section class="container header">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">cronoestudos</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Inicial</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Meus cursos</a>
+        </li>
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li> -->
+        <li class="nav-item">
+          <a href="#" class="nav-link active">Perfil</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link active">Grade</a>
+        </li>
+        <li class="nav-item bg-danger">
+          <a href="<?php echo URL_BASE . "login/logout" ?>" class="nav-link active p-2">Sair</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+</section>

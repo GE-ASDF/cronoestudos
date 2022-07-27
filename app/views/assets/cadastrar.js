@@ -1,5 +1,7 @@
-let formCadastrar = document.querySelector("#cadastrarUsuario")
+let formCadastrar = document.querySelector("#cadastrar-usuario")
 let mensagem = document.querySelector(".mensagem")
+
+
 window.onload = function(){
 
     formCadastrar.onsubmit = function(e){
@@ -7,16 +9,15 @@ window.onload = function(){
         var form = new FormData(formCadastrar);
         xmlHttpPost("login/cadastrar", function(){
             beforeSend(function(){
-                console.log("carregando");
+                mensagem.innerHTML = `<span class="alert alert-success"> Carregando </span>`
             });
             success(function(){
                 var response = xhttp.responseText;
-                if(response == "cadastrado"){
+                if(response == 1){
                     mensagem.innerHTML = `<span class="alert alert-success"> Cadastrado com sucesso </span>`
                 }
-                if(response == "erro"){
-                    mensagem.innerHTML = `<span class="alert alert-danger"> Tente novamente. </span>`
-                
+                if(response == 0){
+                    mensagem.innerHTML = `<span class="alert alert-danger">Cadastro não efetuado. Tente novamente. </span>`
                 }
             })
         }, form)

@@ -7,7 +7,7 @@ modalOpen.addEventListener("click", function(){
     modal.style.top = "0px";
 })
 
-modalClose.addEventListener("click", function(e){
+modalClose.addEventListener("click", function(){
     modal.style.opacity = "0";
     modal.style.top = "-1000px";
 })
