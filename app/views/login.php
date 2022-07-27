@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login necessário</title>
+    <title><?php echo $title ?></title>
     <link rel="stylesheet" href="<?php echo URL_BASE ?>assets/css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script>
+        document.documentElement.classList.add("js");
+    </script>
 </head>
 <body>
     
@@ -17,19 +20,19 @@
         <div class="login container d-flex flex-column justify-content-center align-items-center">
             <div class="row mb-4">
                 <div class="col-xl">
-                    <div class="row">
+                    <div data-anime="100" class="fadeInDown row">
                         <?php echo getFlash("email") ?>
                     </div>
-                    <div class="row">
+                    <div data-anime="100" class="fadeInDown row">
                         <?php echo getFlash("senha") ?>
                     </div>
                 </div>
             </div>
-            <div class="row rounded bg-dark text-light p-3">
+            <div data-anime="300" class="fadeInDown row rounded bg-dark text-light p-3">
                 <div class="row">
                     <div class="mb-3 d-flex flex-column align-items-center justify-content-center">
                         <i class="medium material-icons">person</i>
-                        <h3 class="signin-text mb-3">Login</h3>
+                        <h5 class="title">cronoestudos</h5>
                     </div>
                 </div>
                
@@ -91,7 +94,7 @@
                 <input class="form-control" type="password" name="senha">
             </div>
             <button type="submit" class="btn btn-primary mt-4">Salvar</button>
-            <button type="button" class="btn btn-secondary mt-4" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-secondary mt-4 close-modal" data-bs-dismiss="modal">Fechar</button>
         </form>
       </div>
       <div class="modal-footer">

@@ -14,6 +14,7 @@ class HomeController extends Controller{
 
    public function index(){
        $dados["view"] = "index";
+       $dados["title"] = "Página inicial | " . $_SESSION[SESSION_LOGIN]->nome;
        $this->load("template", $dados);
    } 
   

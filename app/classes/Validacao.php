@@ -3,7 +3,6 @@ namespace app\classes;
 
 use app\models\FindBy;
 use app\models\tables\Usuarios;
-
 class Validacao{
 
     public static function validacao(array $validacoes){

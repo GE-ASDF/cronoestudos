@@ -1,25 +1,34 @@
 <?php
+/**
+ * Class responsável pelo login do sistema e cadastro inicial
+ * A class é responsável pelo login do usuário no sistema e pelo cadastro inicial dele.
+ * 
+ * @author Anderson Souza <andersonsouza007@live.com>
+ */
 namespace app\controllers;
-
-use app\classes\Flash;
 use app\classes\Validacao;
-use app\models\Login;
 use app\core\Controller;
-use app\models\Activerecord;
 use app\models\FindBy;
 use app\models\Insert;
 use app\models\tables\Usuarios;
-use app\models\Usuarios as ModelsUsuarios;
 
 class LoginController extends Controller{
 
+    /** Esta função não possui retorno, ou seu retorno é void 
+     * @var void */
     public function index(){
         $dados["view"] = "login";
+        $dados["title"] = "Login necessário";
         $this->load("login", $dados);
     }
+    
+    /** Função responsável pelo login no sistema
+     * a variável $validate é responsável por enviar as informação para a class de validação.
+     * Caso o retorno seja falso o usuário é redirecionado para a página de login novamente.
+     * Caso o retorno seja verdadeiro o controller verificará se os dados enviados coincidem com os do banco de dados.
+     * @access public
+     */
     public function logar(){
-        // $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
-        // $senha = strip_tags($_POST["senha"]);
         
         $validate = (new Validacao)::validacao([
             "email" => "required|email|existe:usuarios",
@@ -28,25 +37,26 @@ class LoginController extends Controller{
         
 
         if(!$validate){
-            return redirect("login");
+            return redirect(URL_BASE);
         }
 
         $objUsuario = new Usuarios;
+        /**Verfica se o e-mail está cadastrado no banco de dados */
         $usuario = $objUsuario->execute(new FindBy(field:"email", value:$validate["email"]));
 
         if($usuario->email != $validate["email"]){
             setFlash("email", "E-mail não cadastrado.");
-            return header("location:". URL_BASE ."login");
+            return redirect(URL_BASE);
         }
 
         $passwordMatch = password_verify($validate["senha"], $usuario->senha);
         if(!$passwordMatch){
             setFlash("senha", "Senha inválida.");
-            return header("location:". URL_BASE ."login");
+            return redirect(URL_BASE);
         }
         unset($usuario->senha);
         $_SESSION[SESSION_LOGIN] = $usuario;
-        return header("location:" . URL_BASE);
+        return redirect(URL_BASE);
    }
 
    public function cadastrar(){
@@ -56,15 +66,14 @@ class LoginController extends Controller{
         $validate = (new Validacao)::validacao([
             "nome"=>"required",
             "sobrenome"=>"required",
-            "email"=>"required|unique:usuarios",
+            "email"=>"required|email|unique:usuarios",
             "senha"=>"required"
         ]);
         
 
         if(!$validate){
             echo json_encode(0);
-            // setFlash("message", "Tente realizar o cadastro novamente.");
-            // return redirect(URL_BASE);
+            setFlash("message", "Tente realizar o cadastro novamente.");
         }
         
         if($validate){
@@ -74,7 +83,7 @@ class LoginController extends Controller{
             $cadastrar->senha = password_hash($validate["senha"], PASSWORD_DEFAULT);
 
             $cadastrado = $cadastrar->execute(new Insert($validate));
-            
+
             if($cadastrado){
                 echo json_encode(1);
             }else{
