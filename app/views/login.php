@@ -47,7 +47,9 @@
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Logar" class="btn btn-primary mt-4">
-                       
+                        <button type="button" class="btn btn-dark mt-4 flex-start" data-bs-toggle="modal" data-bs-target="#recuperarSenha">
+                            Recuperar senha
+                        </button>
                     </div>
                 </form>
                 <button type="button" class="btn btn-dark mt-4 flex-start" data-bs-toggle="modal" data-bs-target="#cadastre-se">
@@ -79,11 +81,11 @@
         <form id="cadastrar-usuario">
             <div class="form-group mb-2">
                 <label for="nome">Nome</label>
-                <input class="form-control" type="nome" name="nome">
+                <input class="form-control" type="text" name="nome">
             </div>
             <div class="form-group mb-2">
                 <label for="sobrenome">Sobrenome</label>
-                <input class="form-control" type="sobrenome" name="sobrenome">
+                <input class="form-control" type="text" name="sobrenome">
             </div>
             <div class="form-group mb-2">
                 <label for="email">E-mail</label>
@@ -103,8 +105,40 @@
   </div>
 </div>
 
+
+<div class="modal fade" id="recuperarSenha" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="mensagem p-3 mb-4 d-flex justify-content-center align-items-center">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="p-3 d-flex justify-content-center align-items-center">
+            <?php echo getFlash("email") ?>
+        </div>
+    </div>
+</div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h5 class="modal-title" id="exampleModalLabel">Digite seu e-mail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body bg-light">
+        <form id="recuperar-senha">
+            <div class="form-group mb-2">
+                <label for="email2">Nome</label>
+                <input class="form-control" type="email" name="email2">
+            </div>
+            <button id="btnRecuperar" type="submit" class="btn btn-primary mt-4">Salvar</button>
+            <button type="button" class="btn btn-secondary mt-4 close-modal" data-bs-dismiss="modal">Fechar</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="<?php echo URL_BASE ?>app/views/assets/xhttp.js"></script>
-<script src="<?php echo URL_BASE ?>app/views/assets/cadastrar.js"></script>
+<script src="<?php echo URL_BASE ?>app/views/assets/recuperarsenha.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <script src="<?php echo URL_BASE ?>assets/js/simple-anime.js"></script>
 <script src="<?php echo URL_BASE ?>assets/js/script.js"></script>

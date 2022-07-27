@@ -18,8 +18,8 @@ function xmlHttpPost(url, callback, parameters = ''){
     if(typeof(parameters) != "object"){
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
     }
+   
     xhttp.send(parameters);
-
 }
 
 function beforeSend(callback){
