@@ -1,11 +1,10 @@
 <?php
-
 namespace app\controllers;
 
 use app\classes\IsAdmin;
-use app\classes\IsProtected;
-use app\classes\NotLogged;
 use app\core\Controller;
+use app\classes\NotLogged;
+use app\classes\IsProtected;
 
 class UsuariosController extends Controller{
 
@@ -16,12 +15,10 @@ class UsuariosController extends Controller{
         if(!$isAdmin) IsProtected::isProtected();
     }
 
-   public function index(){
-       echo "Controller usuários";
-   } 
-
-    public function cadastrar(){
-        echo "Controller cadastrar";
-    } 
+    public function index(){
+        $dados["title"] = "Cadastro de usuários";
+        $dados["view"] = "formularios/Usuarios/Create";
+        $this->load("template", $dados);
+    }
 
 }

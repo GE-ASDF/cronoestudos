@@ -18,8 +18,15 @@
 
 
         <header>
-
-            <?php include "cabecalho.php" ?>
+        
+            <?php
+                if(!isset($_SESSION[SESSION_LOGIN]) || $_SESSION[SESSION_LOGIN]->colaborador != 1){
+                    include "cabecalho.php";
+                }elseif(isset($_SESSION[SESSION_LOGIN]) && $_SESSION[SESSION_LOGIN]->colaborador == 1){
+                    include "cabecalhoadmin.php";
+                }
+             
+             ?>
 
         </header>
 

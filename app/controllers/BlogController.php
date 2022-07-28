@@ -27,7 +27,7 @@ class BlogController extends Controller{
     }
             $objBlog = new Blog;
             $dados["news"] = $objBlog->find($id);
-            $dados["view"] = "formularios/blog/detalhe";
+            $dados["view"] = "formularios/Blog/detalhe";
             $dados["title"] = "Blog";
             $this->load("template", $dados);
       

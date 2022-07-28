@@ -14,22 +14,28 @@
         <li class="nav-item">
           <a class="nav-link active" href="#">Meus cursos</a>
         </li>
-        <!-- <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Cadastros
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="<?php echo URL_BASE ."usuarios" ?>">Usuários</a></li>
+            <li><a class="dropdown-item" href="#">Cursos</a></li>
+            <li><a class="dropdown-item" href="#">Aulas</a></li>
+            <li><a class="dropdown-item" href="#">Horários</a></li>
           </ul>
-        </li> -->
-        <li class="nav-item">
-          <a href="#" class="nav-link active">Perfil</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Listar
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="<?php echo URL_BASE . "listarusuarios" ?>">Usuários</a></li>
+            <li><a class="dropdown-item" href="#">Cursos</a></li>
+          </ul>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link active">Horários</a>
+          <a href="#" class="nav-link active">Perfil</a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link active">Grade</a>
