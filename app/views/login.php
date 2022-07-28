@@ -124,8 +124,8 @@
       <div class="modal-body bg-light">
         <form id="recuperar-senha">
             <div class="form-group mb-2">
-                <label for="email2">Nome</label>
-                <input class="form-control" type="email" name="email2">
+                <label for="email2">E-mail:</label>
+                <input class="form-control" type="email" name="email">
             </div>
             <button id="btnRecuperar" type="submit" class="btn btn-primary mt-4">Salvar</button>
             <button type="button" class="btn btn-secondary mt-4 close-modal" data-bs-dismiss="modal">Fechar</button>

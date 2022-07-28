@@ -13,7 +13,8 @@ class FindAll implements ActiveRecordInterfaceExecute{
         private array $where = [],
         private string|int $limit = '',
         private string|int $offset = '',
-        private string $fields = "*"
+        private string $fields = "*",
+        private $group = ""
     )
     {
         
@@ -40,6 +41,7 @@ class FindAll implements ActiveRecordInterfaceExecute{
         $sql.= (!$this->where) ? "":" WHERE {$where[0]} = :{$where[0]}";
         $sql.= (!$this->limit) ? "": " LIMIT {$this->limit} = :{$this->limit} ";
         $sql.= (!$this->offset) ? "": " OFFSET {$this->offset} = :{$this->offset}";
+        $sql.= (!$this->group) ? "": " GROUP BY {$this->group}";
         return $sql;
     }
 }

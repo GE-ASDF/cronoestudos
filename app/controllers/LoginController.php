@@ -96,7 +96,7 @@ class LoginController extends Controller{
     public function recuperarsenha(){
 
         $validate = (new Validacao)::validacao([
-            "email2" => "required|email",
+            "email" => "required|email|existe:usuarios",
         ]);
         
         if($validate == false){
@@ -106,14 +106,9 @@ class LoginController extends Controller{
         /**Verfica se o e-mail está cadastrado no banco de dados */
         if($validate){ 
             $objUsuario = new Usuarios;
-            $usuario = $objUsuario->execute(new FindBy(field:"email", value:$validate["email2"]));
+            $usuario = $objUsuario->execute(new FindBy(field:"email", value:$validate["email"]));
 
         if($usuario){            
-            $destinatario = $usuario->email;
-            $assunto = "Recuperação de senha";
-            $mensagem = utf8_decode('Sua senha é '. $usuario->senha);
-            $cabecalhos = "From: ". "andersonsouza007@live.com";
-            mail($destinatario, $assunto, $mensagem, $cabecalhos);
             echo json_encode(1);
         }else{
             echo json_encode(0);
