@@ -1,5 +1,5 @@
 <section class="container  mt-4 d-flex flex-column">
-    
+    <div class="mensagem"></div>
     <div class="header row">
         <div class="mb-2 header-title title">
             Lista de usuários
@@ -17,6 +17,7 @@
                     <th>ID</th>
                     <th>Nome</th>
                     <th>Email</th>
+                    <th>Colaborador</th>
                     <th colspan="2">Ações</th>
                 </tr>
             </thead>
@@ -26,6 +27,14 @@
                     <td><?php echo $usuario->idusuario ?></td>
                     <td><?php echo $usuario->nome ." ". $usuario->sobrenome ?></td>
                     <td><?php echo $usuario->email ?></td>
+                    <td>
+                        <form class="reload-<?php echo $usuario->idusuario ?> text-center atualizador">
+                            <input type="hidden" name="idusuario" value="<?php echo $usuario->idusuario ?>">
+                            <button class="btn-<?php echo $usuario->idusuario ?>" style="border:none;background:none;padding:none;margin:none;width:max-content;outline:none">
+                                <i style="color:white;" class="material-icons"><?php echo $usuario->colaborador == 1 ? "check":"check_box_outline_blank" ?></i>
+                            </button>
+                        </form>
+                        </td>
                     <td>
                         <a href="<?php echo URL_BASE . "usuarios/editar" ?>" class="mx-1 flex-grow-1" style="color:white"><i class="material-icons">edit</i></a>
                     </td>
@@ -40,29 +49,3 @@
     </div>
 
 </section>
-<script>
-
-        const TXTBUSCA = document.querySelector("#txtBusca");
-        const tbody = document.querySelector("#tbody");
-        
-        TXTBUSCA.addEventListener("keyup", function(){
-
-            let filtro = TXTBUSCA.value.toLowerCase().trim();
-            let tr = tbody.getElementsByTagName("tr")
-            
-            for(let posicao in tr){
-
-                if(true === isNaN(posicao)){
-                    continue;
-                }
-                let value = tr[posicao].innerHTML.toLowerCase().trim();
-                if(true === value.includes(filtro)){
-                    tr[posicao].style.display = '';
-                }else{
-                    tr[posicao].style.display = "none"
-                }
-            }
-
-        })
-
-</script>

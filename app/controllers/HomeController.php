@@ -2,14 +2,14 @@
 
 namespace app\controllers;
 
+use app\models\Blog;
+use app\models\FindAll;
 use app\core\Controller;
 use app\classes\NotLogged;
-use app\models\Blog;
 use app\models\daos\FormacoesUsuarios;
-use app\models\FindAll;
-use app\models\tables\Usuarios_formacoes;
 use app\models\tables\Aulas_assistidas;
 use app\models\tables\Cursos_assistidos;
+use app\models\tables\Usuarios_formacoes;
 
 class HomeController extends Controller{
 

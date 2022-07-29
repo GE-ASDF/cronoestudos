@@ -6,6 +6,7 @@ use app\core\Controller;
 use app\classes\NotLogged;
 use app\models\FindAll;
 use app\models\tables\Cursos;
+use app\models\UpdateTeste;
 
 class CursosController extends Controller{
 
@@ -15,6 +16,7 @@ class CursosController extends Controller{
     }
 
    public function index(){
+    
     $objCursos = new Cursos;
     $dados["cursos"] = $objCursos->execute(new FindAll());
        $dados["view"] = "formularios/Cursos/Index";

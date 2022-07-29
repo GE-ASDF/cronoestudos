@@ -36,6 +36,10 @@
 
         </main>
     </div>
+    <script src="<?php echo URL_BASE ?>app/views/assets/xhttp.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="<?php echo URL_BASE ?>app/views/assets/ecolaborador.js"></script>
+    <script src="<?php echo URL_BASE ?>app/views/assets/pesquisa.js"></script>
     <script src="<?php echo URL_BASE ?>assets/js/simple-anime.js"></script>
     <script src="<?php echo URL_BASE ?>assets/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
