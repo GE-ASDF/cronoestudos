@@ -23,12 +23,12 @@
             </thead>
             <tbody id="tbody">
                 <?php foreach($usuarios as $usuario): ?>
-                <tr>
+                <tr class="linha">
                     <td><?php echo $usuario->idusuario ?></td>
                     <td><?php echo $usuario->nome ." ". $usuario->sobrenome ?></td>
                     <td><?php echo $usuario->email ?></td>
                     <td>
-                        <form class="reload-<?php echo $usuario->idusuario ?> text-center atualizador">
+                        <form class="text-center atualizador">
                             <input type="hidden" name="idusuario" value="<?php echo $usuario->idusuario ?>">
                             <button class="btn-<?php echo $usuario->idusuario ?>" style="border:none;background:none;padding:none;margin:none;width:max-content;outline:none">
                                 <i style="color:white;" class="material-icons"><?php echo $usuario->colaborador == 1 ? "check":"check_box_outline_blank" ?></i>
@@ -49,3 +49,4 @@
     </div>
 
 </section>
+<script src="<?php echo URL_BASE ?>app/views/assets/ecolaborador.js"></script>

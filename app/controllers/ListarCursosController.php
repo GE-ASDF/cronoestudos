@@ -1,31 +1,33 @@
 <?php
+
 namespace app\controllers;
 
 use app\classes\IsAdmin;
 use app\classes\IsProtected;
 use app\core\Controller;
 use app\classes\NotLogged;
-use app\classes\Validacao;
-use app\models\Usuarios\Usuarios;
+use app\models\Cursos\Cursos;
 
-class ListarUsuariosController extends Controller{
+class ListarCursosController extends Controller{
 
-    function __construct(){  
+    public function __construct()
+    {   
         if(!IsAdmin::isAdmin()){
             IsProtected::isProtected();
         }
-        NotLogged::notLogged();        
+        NotLogged::notLogged();
     }
 
-    public function index(){
-        $dados["usuarios"] = (new Usuarios)->all();
-        $dados["view"] = "formularios/Usuarios/Index";
-        $dados["title"] = "Lista de usuários";
+   public function index(){
+        $objCursosUsuario = new Cursos;
+        $dados["cursos"] = ($objCursosUsuario->findAll());
+        $dados["view"] = "formularios/Cursos/Index";
+        $dados["title"] = "Lista de cursos";
         $this->load("template", $dados);
-    }
+   } 
 
-    public function colaborador(){
-
+   public function ativo(){
+    
         if(!IsAdmin::isAdmin()){
             IsProtected::isProtected();
         }
@@ -33,11 +35,11 @@ class ListarUsuariosController extends Controller{
         NotLogged::notLogged();
 
         if(IsAdmin::isAdmin()){
-            $idusuario = strip_tags($_GET["idusuario"]);
-            if($idusuario == null || $idusuario == ''){
+            $idcurso = strip_tags($_GET["idcurso"]);
+            if($idcurso == null || $idcurso == ''){
                 echo json_encode(0);
             }
-            $atualizado = (new Usuarios)->colaborador("idusuario", $idusuario);
+            $atualizado = (new Cursos)->ativo("idcurso", $idcurso);
             
             if($atualizado){
                 echo json_encode(1);
@@ -47,7 +49,6 @@ class ListarUsuariosController extends Controller{
         }else{
             return redirect(URL_BASE);
         }
-
-    }
-
+   }
+  
 }

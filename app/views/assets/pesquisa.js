@@ -1,10 +1,10 @@
 const TXTBUSCA = document.querySelector("#txtBusca");
 const tbody = document.querySelector("#tbody");
-
-TXTBUSCA.addEventListener("keyup", function(){
-
+    TXTBUSCA.addEventListener("keyup", function(){
+        
     let filtro = TXTBUSCA.value.toLowerCase().trim();
-    let tr = tbody.getElementsByTagName("tr")
+    // let tr = tbody.getElementsByTagName("tr")
+    let tr = tbody.getElementsByClassName("linha")
     
     for(let posicao in tr){
 

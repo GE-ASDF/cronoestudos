@@ -8,9 +8,7 @@
 namespace app\controllers;
 use app\classes\Validacao;
 use app\core\Controller;
-use app\models\FindBy;
-use app\models\Insert;
-use app\models\tables\Usuarios;
+use app\models\Usuarios\Usuarios;
 
 class LoginController extends Controller{
 
@@ -42,7 +40,7 @@ class LoginController extends Controller{
 
         $objUsuario = new Usuarios;
         /**Verfica se o e-mail está cadastrado no banco de dados */
-        $usuario = $objUsuario->execute(new FindBy(field:"email", value:$validate["email"]));
+        $usuario = $objUsuario->findBy(field:"email", value:$validate["email"]);
 
         if($usuario->email != $validate["email"]){
             setFlash("email", "E-mail não cadastrado.");
@@ -75,14 +73,14 @@ class LoginController extends Controller{
             echo json_encode(0);
             setFlash("message", "Tente realizar o cadastro novamente.");
         }
-        
+      
         if($validate){
             $cadastrar->nome = $validate["nome"];
             $cadastrar->sobrenome = $validate["sobrenome"];
             $cadastrar->email = $validate["email"];
             $cadastrar->senha = password_hash($validate["senha"], PASSWORD_DEFAULT);
 
-            $cadastrado = $cadastrar->execute(new Insert($validate));
+            $cadastrado = $cadastrar->create($validate);
 
             if($cadastrado){
                 echo json_encode(1);
@@ -95,25 +93,25 @@ class LoginController extends Controller{
 
     public function recuperarsenha(){
 
-        $validate = (new Validacao)::validacao([
-            "email" => "required|email|existe:usuarios",
-        ]);
-        
-        if($validate == false){
-            echo json_encode(0);
-        }
-        
-        /**Verfica se o e-mail está cadastrado no banco de dados */
-        if($validate){ 
-            $objUsuario = new Usuarios;
-            $usuario = $objUsuario->execute(new FindBy(field:"email", value:$validate["email"]));
+            $validate = (new Validacao)::validacao([
+                "email" => "required|email|existe:usuarios",
+            ]);
+            
+            if($validate == false){
+                echo json_encode(0);
+            }
+            
+            /**Verfica se o e-mail está cadastrado no banco de dados */
+            if($validate){ 
+                $objUsuario = new Usuarios;
+                $usuario = $objUsuario->findBy(field:"email", value:$validate["email"]);
 
-        if($usuario){            
-            echo json_encode(1);
-        }else{
-            echo json_encode(0);
+            if($usuario){            
+                echo json_encode(1);
+            }else{
+                echo json_encode(0);
+            }
         }
-    }
         
 
     }

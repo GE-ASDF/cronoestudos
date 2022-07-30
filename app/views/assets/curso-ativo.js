@@ -5,8 +5,8 @@ window.onload = function(){
     atualizador.forEach(formulario=>{
         formulario.addEventListener("submit", function(e){
             e.preventDefault();
-            let usuario = formulario.querySelector("input").value;
-            xmlHttpGet("listarusuarios/colaborador", function(){
+            let curso = formulario.querySelector("input").value;
+            xmlHttpGet("listarcursos/ativo", function(){
                 beforeSend(function(){
                     mensagem.innerHTML = `<span class="alert alert-danger">Carregando</span> `;
                 });
@@ -20,14 +20,14 @@ window.onload = function(){
                             mensagem.innerHTML = ''
                         }, 1500);
                     }else{
-                        mensagem.innerHTML = `<span class="alert alert-success">Tente novamente</span> `;
+                        mensagem.innerHTML = `<span class="alert alert-danger">Tente novamente</span> `;
                         setTimeout(() => {
                             mensagem.innerHTML = ''
                         }, 1500);
                     }
 
                 })
-            }, "?idusuario="+usuario)
+            }, "?idcurso="+curso)
         })
     })
   

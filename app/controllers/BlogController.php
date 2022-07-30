@@ -1,10 +1,9 @@
 <?php
-
 namespace app\controllers;
 
 use app\core\Controller;
+use app\models\Blog\Blog;
 use app\classes\NotLogged;
-use app\models\Blog;
 
 class BlogController extends Controller{
 
@@ -13,24 +12,21 @@ class BlogController extends Controller{
         NotLogged::notLogged();
     }
 
-   public function index(){
-       $objBlog = new Blog;
-        $dados["view"] = "formularios/blog/blog";
-        $dados["news"] = $objBlog->selectAll();
-        $dados["title"] = "Blog";
+    public function index(){
+        $dados["view"] = "formularios/Blog/Index";
+        $dados["title"] = "Nosso blog";
+        $dados["news"] = (new Blog)->findAll();
         $this->load("template", $dados);
-   } 
-
-   public function detalhe($id = null){
-    if($id == null){
-        redirect(URL_BASE . "blog");
     }
-            $objBlog = new Blog;
-            $dados["news"] = $objBlog->find($id);
-            $dados["view"] = "formularios/Blog/detalhe";
-            $dados["title"] = "Blog";
-            $this->load("template", $dados);
-      
-   }
-  
+
+    public function detalhe($id = null){
+        if($id == null){
+            return redirect(URL_BASE."Blog");
+        }
+        $dados["view"] = "formularios/Blog/detalhe";
+        $dados["title"] = "Nosso blog";
+        $dados["news"] = (new Blog)->findBy("id", $id);
+        $this->load("template", $dados);
+    }
+
 }

@@ -2,11 +2,12 @@
 namespace app\classes;
 
 class IsAdmin{
-    public static function isAdmin(string|int|null $verificar = null, string|int $parametro = 1){
-        if($verificar == null){
+    public static function isAdmin(){
+        $colaborador = $_SESSION[SESSION_LOGIN]->colaborador;
+        if($colaborador == null){
             return false;
         }
-        if($verificar != $parametro){
+        if($colaborador != 1){
             return false;
         }
         return true;

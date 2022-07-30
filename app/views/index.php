@@ -23,8 +23,8 @@
         <div class="card col-md w-75">
         <div class="content d-flex align-items-start">
                 <div class="colbg-primary card-body">
-                    <h5 class="card-title fs-1"><?php echo $qtd_usuario_formacoes ?></h5>
-                    <p class="card-text">qtd formações matriculado</p>
+                    <h5 class="card-title fs-1"><?php echo $qtd_cursos[0]->qtd ?></h5>
+                    <p class="card-text">qtd cursos matriculado</p>
                 </div>
                 <div class="card-body colbg-primary">
                     <i class="large material-icons">school</i>
@@ -35,7 +35,7 @@
         <div class="card col-md w-75">
             <div class="content d-flex align-items-start">
                 <div class="colbg-primary card-body">
-                    <h5 class="card-title fs-1"><?php echo $qtd_aulas_assistidas ?></h5>
+                    <h5 class="card-title fs-1"></h5>
                     <p class="card-text">qtd aulas assistidas</p>
                 </div>
                 <div class="card-body colbg-primary">
@@ -47,7 +47,7 @@
         <div class="card col-md w-75">
         <div class="content d-flex align-items-start">
                 <div class="colbg-primary card-body">
-                    <h5 class="card-title fs-1"><?php echo $qtd_cursos_assistidos ?></h5>
+                    <h5 class="card-title fs-1"></h5>
                     <p class="card-text">qtd cursos concluídos</p>
                 </div>
                 <div class="card-body colbg-primary">
@@ -73,18 +73,21 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
+                            <th>Data da matrícula</th>
                             <th>Curso</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        foreach($formacoes_matriculado as $matriculado): ?>
+                        
+                       <?php  foreach($cursos as $curso): ?>
                         <tr>
+                            <td><?php echo formatDate($curso["data"]) ?></td>
                             <td>
-                                <a class="nav-link" href="<?php echo URL_BASE ."meuscursos/". $matriculado["idformacao"] ?>"><?php echo $matriculado["formacao"]; ?>
+                                <a class="nav-link" href=""> <?php echo $curso["curso"] ?> </a>
                             </td>
                         </tr>
                         <?php endforeach; ?>
+                        
                     </tbody>
                 </table>
             </section>
@@ -93,7 +96,7 @@
             <div class="container-title">
                     <h3 class="title text-center">Novidades</h3>
                     <div id="search" class="row">
-                        <input type="text" id="searchInput" class="form-control col-md-1" placeholder="Pesquisar novidade...">
+                        <input type="text" id="txtBusca" class="form-control col-md-1" placeholder="Pesquisar novidade...">
                     </div>
                 </div>
                 <table class="table">
@@ -103,17 +106,21 @@
                             <th>Novidade</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
+                       <?php if($news): ?>
                         <?php foreach($news as $new): ?>
-                        <tr>
+                        <tr class="linha">
                             <td>
                                 <?php echo formatDate($new->data_publicacao) ?>
                             </td>
                             <td>
-                                <a href="<?php echo URL_BASE . "blog/detalhe/" . $new->id ?>" class="nav-link"><?php echo $new->titulo ?></a>
+                                <a href="<?php echo URL_BASE . "blog/detalhe/" . $new->id ?>" class="nav-link">
+                                    <?php echo $new->titulo ?>
+                                </a>
                             </td>
                         </tr>
                         <?php endforeach; ?>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </section>

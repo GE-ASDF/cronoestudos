@@ -20,9 +20,9 @@
         <header>
         
             <?php
-                if(!isset($_SESSION[SESSION_LOGIN]) || $_SESSION[SESSION_LOGIN]->colaborador != 1){
+                if(NIVEL != 1){
                     include "cabecalho.php";
-                }elseif(isset($_SESSION[SESSION_LOGIN]) && $_SESSION[SESSION_LOGIN]->colaborador == 1){
+                }else{
                     include "cabecalhoadmin.php";
                 }
              
@@ -38,7 +38,6 @@
     </div>
     <script src="<?php echo URL_BASE ?>app/views/assets/xhttp.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="<?php echo URL_BASE ?>app/views/assets/ecolaborador.js"></script>
     <script src="<?php echo URL_BASE ?>app/views/assets/pesquisa.js"></script>
     <script src="<?php echo URL_BASE ?>assets/js/simple-anime.js"></script>
     <script src="<?php echo URL_BASE ?>assets/js/script.js"></script>

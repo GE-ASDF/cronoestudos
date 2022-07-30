@@ -2,7 +2,7 @@
 namespace app\classes;
 
 use app\models\FindBy;
-use app\models\tables\Usuarios;
+use app\models\Usuarios\Usuarios;
 class Validacao{
 
     public static function validacao(array $validacoes){
@@ -69,7 +69,7 @@ class Validacao{
     private static function unique($field, $param){
         $usuario = new Usuarios;
         $campo = strip_tags($_POST[$field]);
-        $existe = $usuario->execute(new FindBy(field:$field, value:$campo));
+        $existe = $usuario->findBy(field:$field, value:$campo);
         if($existe){
             setFlash($field, "Este {$field} já está cadastrado no nosso banco de dados.");
             return false;
@@ -80,7 +80,7 @@ class Validacao{
     private static function existe($field, $param){
         $usuario = new Usuarios;
         $campo = strip_tags($_POST[$field]);
-        $existe = $usuario->execute(new FindBy(field:$field, value:$campo));
+        $existe = $usuario->findBy(field:$field, value:$campo);
         if(!$existe){
             setFlash($field, "Este {$field} não está cadastrado no nosso banco de dados.");
             return false;

@@ -78,7 +78,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body bg-light">
-        <form id="cadastrar-usuario">
+        <form action="<?php echo URL_BASE ."login/cadastrar" ?>" method="POST" id="cadastrar-usuario">
             <div class="form-group mb-2">
                 <label for="nome">Nome</label>
                 <input class="form-control" type="text" name="nome">
