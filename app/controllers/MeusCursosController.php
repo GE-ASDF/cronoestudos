@@ -14,8 +14,7 @@ class MeusCursosController extends Controller{
     }
 
    public function index(){
-        $objCursosUsuario = new CursosUsuarios;
-        $dados["cursos"] = ($objCursosUsuario->cursosPorUsuario());
+        $dados["cursos"] = (new CursosUsuarios)->cursosPorUsuario();
         $dados["view"] = "formularios/MeusCursos/Index";
         $dados["title"] = "Página inicial | " . $_SESSION[SESSION_LOGIN]->nome;
         $this->load("template", $dados);
