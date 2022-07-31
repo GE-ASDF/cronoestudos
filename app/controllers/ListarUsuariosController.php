@@ -1,6 +1,8 @@
 <?php
 namespace app\controllers;
 
+use app\classes\BlockNotAdmin;
+use app\classes\BlockNotLogged;
 use app\classes\IsAdmin;
 use app\classes\IsProtected;
 use app\core\Controller;
@@ -10,11 +12,11 @@ use app\models\Usuarios\Usuarios;
 
 class ListarUsuariosController extends Controller{
 
-    function __construct(){  
-        if(!IsAdmin::isAdmin()){
-            IsProtected::isProtected();
-        }
-        NotLogged::notLogged();        
+    function __construct(){ 
+        
+        BlockNotAdmin::block($this, ['index','colaborador']);
+        BlockNotLogged::block($this, ['index', 'colaborador']);
+           
     }
 
     public function index(){
@@ -26,17 +28,11 @@ class ListarUsuariosController extends Controller{
 
     public function colaborador(){
 
-        if(!IsAdmin::isAdmin()){
-            IsProtected::isProtected();
-        }
-
-        NotLogged::notLogged();
-
-        if(IsAdmin::isAdmin()){
             $idusuario = strip_tags($_GET["idusuario"]);
             if($idusuario == null || $idusuario == ''){
                 echo json_encode(0);
             }
+
             $atualizado = (new Usuarios)->colaborador("idusuario", $idusuario);
             
             if($atualizado){
@@ -44,9 +40,6 @@ class ListarUsuariosController extends Controller{
             }else{
                 echo json_encode(0);
             }
-        }else{
-            return redirect(URL_BASE);
-        }
 
     }
 

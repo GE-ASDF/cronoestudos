@@ -2,21 +2,32 @@
 namespace app\core;
 
 class MethodExtract{
-    public static function extract($controller, string $method){
+    public static function extract($controller){
+
         $uri = Uri::uri();
-        $method = strtolower(Uri::uriExiste($uri, 1));
-        $method = "index";
+        $folder = FolderExtract::extract($uri);
+        $method = 'index';
+
+        $method = (!$folder) ? 
+        strtolower(Uri::uriExist($uri, 1)):
+        strtolower(Uri::uriExist($uri, 2));
+        
+       
 
         if($method === ''){
             $method = "index";
-        }
-
+        } 
+        
         if(!method_exists($controller, $method)){
             $method = "index";
+            $sliceIndexStartFrom = (!$folder) ? 1:2;
         }else{
-            $method = $method;
+            $sliceIndexStartFrom = (!$folder) ? 2:3;
         }
-        
-        return $method;
+
+
+        return [
+            $method, $sliceIndexStartFrom
+        ];
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers;
 
+use app\classes\BlockNotLogged;
 use app\core\Controller;
 use app\models\Blog\Blog;
 use app\classes\NotLogged;
@@ -9,7 +10,7 @@ class BlogController extends Controller{
 
     public function __construct()
     {   
-        NotLogged::notLogged();
+        BlockNotLogged::block($this, ['index', 'detalhe']);
     }
 
     public function index(){

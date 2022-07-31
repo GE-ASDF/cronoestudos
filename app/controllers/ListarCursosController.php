@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\classes\BlockNotAdmin;
+use app\classes\BlockNotLogged;
 use app\classes\IsAdmin;
 use app\classes\IsProtected;
 use app\core\Controller;
@@ -12,10 +14,8 @@ class ListarCursosController extends Controller{
 
     public function __construct()
     {   
-        if(!IsAdmin::isAdmin()){
-            IsProtected::isProtected();
-        }
-        NotLogged::notLogged();
+        BlockNotLogged::block($this, ['index','ativo']);
+        BlockNotAdmin::block($this, ['index','ativo']);
     }
 
    public function index(){
@@ -27,14 +27,7 @@ class ListarCursosController extends Controller{
    } 
 
    public function ativo(){
-    
-        if(!IsAdmin::isAdmin()){
-            IsProtected::isProtected();
-        }
-
-        NotLogged::notLogged();
-
-        if(IsAdmin::isAdmin()){
+     
             $idcurso = strip_tags($_GET["idcurso"]);
             if($idcurso == null || $idcurso == ''){
                 echo json_encode(0);
@@ -46,9 +39,6 @@ class ListarCursosController extends Controller{
             }else{
                 echo json_encode(0);
             }
-        }else{
-            return redirect(URL_BASE);
-        }
    }
   
 }

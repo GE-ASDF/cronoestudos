@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\classes\BlockNotLogged;
 use app\core\Controller;
 use app\classes\NotLogged;
 use app\models\Usuarios\CursosUsuarios;
@@ -10,7 +11,7 @@ class MeusCursosController extends Controller{
 
     public function __construct()
     {   
-        NotLogged::notLogged();
+        BlockNotLogged::block($this, ["index"]);
     }
 
    public function index(){
