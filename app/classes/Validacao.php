@@ -42,17 +42,23 @@ class Validacao{
     }
 
     private static function required($field){
+        
         if(!isset($_POST[$field]) || $_POST[$field] === ''){
-            setFlash($field, "O campo {$field} é obrigatório");
-            return false;
+            if(!isset($_GET[$field]) || $_GET[$field] === ''){
+                setFlash($field, "O campo {$field} é obrigatório");
+                return false;
+            }
         }
-        return strip_tags($_POST[$field]);
+        
+        $resultado = isset($_GET[$field]) ? strip_tags($_GET[$field]):strip_tags($_POST[$field]);
+        return  $resultado;
     }
 
     private static function email($field){
         $emailIsValid = filter_input(INPUT_POST, $field, FILTER_VALIDATE_EMAIL);
             if(!$emailIsValid){
                 setFlash($field, "O campo precisa ter um {$field} válido.");
+                setOld($field, $_POST[$field]);
                 return false;
             }
         return filter_input(INPUT_POST, $field, FILTER_SANITIZE_EMAIL);
@@ -62,6 +68,7 @@ class Validacao{
         $data = strip_tags($_POST[$field]);
         if(strlen($data) > $param){
             setFlash($field, "O campo {$field} tem um limite de {$param} caracteres.");
+            setOld($field, $_POST[$field]);
             return false;
         }
         return $data;
@@ -72,6 +79,7 @@ class Validacao{
         $existe = $usuario->findBy(field:$field, value:$campo);
         if($existe){
             setFlash($field, "Este {$field} já está cadastrado no nosso banco de dados.");
+            setOld($field, $_POST[$field]);
             return false;
         }        
         return $campo;
@@ -83,9 +91,48 @@ class Validacao{
         $existe = $usuario->findBy(field:$field, value:$campo);
         if(!$existe){
             setFlash($field, "Este {$field} não está cadastrado no nosso banco de dados.");
+            setOld($field, $_POST[$field]);
             return false;
         }        
         return $campo;
     }
 
+    private static function image($field){
+        $image = isset($_FILES) && $_FILES[$field] != '' ? $_FILES[$field]:null;
+        $extensao = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
+
+        if($extensao != "jpg" && $extensao != "png" && $extensao != "jpeg" && $extensao != "webp"){
+            setFlash($field, "Tipo de arquivo não suportado");
+            return false;
+        }
+        move_uploaded_file($image['tmp_name'],"upload/" . $image['name']);
+        return $image['name'];
+    }
+    private static function data($field){
+        $data = $_POST[$field];
+
+        if(str_contains($data, "-")){
+            $newDataArray = explode("-", $data);
+            $dateArray = [
+                "dia" => $newDataArray[2],
+                "mes" => $newDataArray[1],
+                "ano" => $newDataArray[0]
+            ];
+            $date = checkdate($dateArray["mes"], $dateArray["dia"], $dateArray["ano"]);
+        }
+
+        if(str_contains($data, "/")){
+            $newDataArray = explode("/", $data);
+            $dateArray = [
+                "dia" => $newDataArray[2],
+                "mes" => $newDataArray[1],
+                "ano" => $newDataArray[0]
+            ];
+            $date = checkdate($dateArray["mes"], $dateArray["dia"], $dateArray["ano"]);
+        }
+        if($date){
+            return $data;
+        }
+        return false;
+    }
 }

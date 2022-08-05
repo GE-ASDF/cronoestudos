@@ -14,8 +14,6 @@ class Cursos extends Model{
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    
-
     public function findBy($field, $value, $criterio = "=", $fields = "*"){
         $sql = "SELECT {$fields} FROM {$this->table} WHERE {$field} {$criterio} :{$field}";
         $prepare = $this->db->prepare($sql);
@@ -23,6 +21,13 @@ class Cursos extends Model{
         return $prepare->fetch(PDO::FETCH_OBJ);
     }
 
+    public function findByAll($field, $value, $criterio = "=", $fields = "*"){
+        $sql = "SELECT {$fields} FROM {$this->table} WHERE {$field} {$criterio} :{$field}";
+        $prepare = $this->db->prepare($sql);
+        $prepare->execute([$field => $value]);
+        return $prepare->fetchAll(PDO::FETCH_OBJ);
+    }
+    
     public function ativo($field, $value, $parameter = "="){
         $situacao = $this->findBy($field, $value, "=");
         $atualizado = false;
@@ -48,5 +53,22 @@ class Cursos extends Model{
         }
         
         return $atualizado;
+    }
+    public function create($dados){
+        $sql = "INSERT INTO {$this->table}(";
+        $sql.= implode(", ", array_keys($dados)) . ")";
+        $sql.= " VALUES(";
+        $sql.= ":". implode(", :", array_keys($dados)). ")";
+        $prepare = $this->db->prepare($sql);
+        
+        foreach($dados as $key=>$dado){
+            if($key == "datacadastro"){
+                $dado.= date(" H:i:s");
+            }
+            $prepare->bindValue(":".$key, $dado);
+        }
+
+        $cadastrado = $prepare->execute();
+        return $cadastrado;
     }
 }

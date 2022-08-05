@@ -26,7 +26,9 @@ class BlogController extends Controller{
         }
         $dados["view"] = "formularios/Blog/detalhe";
         $dados["title"] = "Nosso blog";
-        $dados["news"] = (new Blog)->findBy("id", $id);
+        if((new Blog)->findBy("id", $id)){
+            $dados["news"] = (new Blog)->findBy("id", $id);
+        }
         $this->load("template", $dados);
     }
 

@@ -12,7 +12,6 @@ class MethodExtract{
         strtolower(Uri::uriExist($uri, 1)):
         strtolower(Uri::uriExist($uri, 2));
         
-       
 
         if($method === ''){
             $method = "index";

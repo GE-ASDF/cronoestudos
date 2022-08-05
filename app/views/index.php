@@ -35,7 +35,11 @@
         <div class="card col-md w-75">
             <div class="content d-flex align-items-start">
                 <div class="colbg-primary card-body">
-                    <h5 class="card-title fs-1"></h5>
+                    <h5 class="card-title fs-1">
+                        <?php
+                         echo isset($qtd_aulas_assistidas) ? count($qtd_aulas_assistidas):0  
+                         ?>
+                    </h5>
                     <p class="card-text">qtd aulas assistidas</p>
                 </div>
                 <div class="card-body colbg-primary">
@@ -47,7 +51,11 @@
         <div class="card col-md w-75">
         <div class="content d-flex align-items-start">
                 <div class="colbg-primary card-body">
-                    <h5 class="card-title fs-1"></h5>
+                    <h5 class="card-title fs-1">
+                    <?php
+                         echo isset($qtd_cursos_assistidos) ? count($qtd_cursos_assistidos):0  
+                         ?>
+                    </h5>
                     <p class="card-text">qtd cursos concluídos</p>
                 </div>
                 <div class="card-body colbg-primary">
@@ -83,7 +91,7 @@
                         <tr>
                             <td><?php echo formatDate($curso["data"]) ?></td>
                             <td>
-                                <a class="nav-link" href=""> <?php echo $curso["curso"] ?> </a>
+                                <a class="nav-link" href="<?php echo URL_BASE . "aulas/assistir/" . $curso["idcurso"] ?>"> <?php echo $curso["curso"] ?> </a>
                             </td>
                         </tr>
                         <?php endforeach; ?>

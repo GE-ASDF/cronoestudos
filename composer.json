@@ -7,10 +7,13 @@
         },
         "files":[
             "app/functions/formatDate.php",
+            "app/functions/filtrarProfessor.php",
             "app/helpers/constants.php",
             "app/helpers/dd.php",
             "app/helpers/flash.php",
             "app/helpers/print.php",
+            "app/helpers/session.php",
+            "app/helpers/paragrafar.php",
             "app/helpers/redirect.php"
         ]
     },
