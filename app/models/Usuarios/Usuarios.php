@@ -67,4 +67,23 @@ class Usuarios extends Model{
         return $atualizado;
     }
 
+    public function update($dados, $field, $value){
+
+        $sql = "UPDATE {$this->table} SET " ;
+        
+        foreach($dados as $key => $valor){
+            $sql.= $key ." =:".$key .", "; 
+        }
+        $sql=rtrim($sql, ", ");
+        $sql.=" WHERE {$field} = :{$field}";
+        $prepare = $this->db->prepare($sql);
+        foreach($dados as $key=> $valor){
+            if(!str_contains($key, "idusuario")){
+                $prepare->bindValue(":".$key, $valor);
+            }
+        }
+        $prepare->bindValue(":".$field, $value);
+        return $prepare->execute();        
+    }
+
 }

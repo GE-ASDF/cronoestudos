@@ -5,7 +5,7 @@
             <input type="text" id="txtBusca" class="form-control" placeholder="Pesquisar curso...">
         </div>
     </div>
-    <div id="tbody" class="row gap-2 fadeInDown" data-anime="300">
+    <div id="tbody" class="row gap-2 fadeInDown justify-content-center" data-anime="300">
         <?php if(isset($cursos)): ?>
             <?php foreach($cursos as $key => $curso): ?>
                 <div class="linha card col-md-3">

@@ -26,13 +26,13 @@
           </ul>
         </li> -->
         <li class="nav-item">
-          <a href="#" class="nav-link active">Perfil</a>
+          <a href="<?php echo URL_BASE ."perfil" ?>" class="nav-link active">Perfil</a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link active">Horários</a>
+          <a href="<?php echo URL_BASE . "horarios" ?>" class="nav-link active">Horários</a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link active">Grade</a>
+          <a href="<?php echo URL_BASE . "grade"?>" class="nav-link active">Grade</a>
         </li>
         <li class="nav-item">
           <a href="<?php echo URL_BASE . "blog"?>" class="nav-link active">Blog</a>

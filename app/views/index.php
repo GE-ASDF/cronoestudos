@@ -5,10 +5,10 @@
     <div style="width:max-content" class="card">
         <div style="width:max-content" class="d-flex flex-column card-body">
             <h5 class="card-img col-md-4 fs-1">
-                <img src="<?php echo URL_BASE ?>assets/img/course.jpg" width="100" height="100" style="border-radius:50%" alt="">
+                <img src="<?php echo URL_BASE ?>upload/<?php echo $usuario->foto ?>" width="100" height="100" style="border-radius:50%" alt="">
             </h5>
             <div class="card-text d-flex flex-column flex-wrap">
-                <p style="margin-bottom:-4px" class="">Bem-vindo(a), <?php echo $_SESSION[SESSION_LOGIN]->nome ?></p>
+                <p style="margin-bottom:-4px" class="">Bem-vindo(a), <?php echo $usuario->nome ?></p>
                 <a class="nav-link text-primary" href="<?php echo URL_BASE . "perfil" ?>">Meu perfil</a>
             </div>
             </div>

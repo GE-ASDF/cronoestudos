@@ -11,8 +11,8 @@ class BlogCreateController extends Controller{
 
     public function __construct()
     {
-        BlockNotLogged::block($this, ['index']);
-        BlockNotAdmin::block($this, ['index']);
+        BlockNotLogged::block($this, ['index', 'create']);
+        BlockNotAdmin::block($this, ['index', 'create']);
     }
 
     public function index(){

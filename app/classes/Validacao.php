@@ -49,18 +49,19 @@ class Validacao{
                 return false;
             }
         }
-        
+
         $resultado = isset($_GET[$field]) ? strip_tags($_GET[$field]):strip_tags($_POST[$field]);
         return  $resultado;
     }
-
+    
     private static function email($field){
         $emailIsValid = filter_input(INPUT_POST, $field, FILTER_VALIDATE_EMAIL);
-            if(!$emailIsValid){
-                setFlash($field, "O campo precisa ter um {$field} válido.");
-                setOld($field, $_POST[$field]);
-                return false;
-            }
+        if(!$emailIsValid){
+            setFlash($field, "O campo precisa ter um {$field} válido.");
+            
+            return false;
+        }
+        
         return filter_input(INPUT_POST, $field, FILTER_SANITIZE_EMAIL);
     }
 
@@ -68,39 +69,48 @@ class Validacao{
         $data = strip_tags($_POST[$field]);
         if(strlen($data) > $param){
             setFlash($field, "O campo {$field} tem um limite de {$param} caracteres.");
-            setOld($field, $_POST[$field]);
             return false;
         }
         return $data;
     }
     private static function unique($field, $param){
-        $usuario = new Usuarios;
+        $usuario = new FindBy;
         $campo = strip_tags($_POST[$field]);
-        $existe = $usuario->findBy(field:$field, value:$campo);
+        $existe = $usuario->findBy($param, field:$field, value:$campo);
+    
         if($existe){
             setFlash($field, "Este {$field} já está cadastrado no nosso banco de dados.");
-            setOld($field, $_POST[$field]);
             return false;
         }        
         return $campo;
     }
     
     private static function existe($field, $param){
-        $usuario = new Usuarios;
+        $usuario = new FindBy;
         $campo = strip_tags($_POST[$field]);
-        $existe = $usuario->findBy(field:$field, value:$campo);
+        $existe = $usuario->findBy($param, field:$field, value:$campo);
+        
         if(!$existe){
             setFlash($field, "Este {$field} não está cadastrado no nosso banco de dados.");
-            setOld($field, $_POST[$field]);
             return false;
         }        
         return $campo;
     }
 
-    private static function image($field){
+    private static function image($field, $param){  
         $image = isset($_FILES) && $_FILES[$field] != '' ? $_FILES[$field]:null;
         $extensao = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
-
+        $campo = strip_tags($_POST["idusuario"]);
+        $usuario = (new Usuarios)->findBy("idusuario", $campo);
+        if($extensao == ''){
+            if($usuario){
+                return $usuario->foto;
+            }else{
+                setFlash($field, "Escolha uma imagem para continuar");
+                return false;
+            }
+        }
+        
         if($extensao != "jpg" && $extensao != "png" && $extensao != "jpeg" && $extensao != "webp"){
             setFlash($field, "Tipo de arquivo não suportado");
             return false;
@@ -109,8 +119,9 @@ class Validacao{
         return $image['name'];
     }
     private static function data($field){
-        $data = $_POST[$field];
 
+        $data = $_POST[$field];
+        
         if(str_contains($data, "-")){
             $newDataArray = explode("-", $data);
             $dateArray = [
@@ -124,15 +135,24 @@ class Validacao{
         if(str_contains($data, "/")){
             $newDataArray = explode("/", $data);
             $dateArray = [
-                "dia" => $newDataArray[2],
+                "dia" => $newDataArray[0],
                 "mes" => $newDataArray[1],
-                "ano" => $newDataArray[0]
+                "ano" => $newDataArray[2]
             ];
             $date = checkdate($dateArray["mes"], $dateArray["dia"], $dateArray["ano"]);
+            $data = str_replace("/", "-", $data);
+            $data = date("Y-m-d", strtotime($data));
         }
+
         if($date){
             return $data;
         }
         return false;
+    }
+
+    private static function senha($field){
+        $senha = $_POST[$field];
+        $newSenha = password_hash($senha, PASSWORD_DEFAULT);
+        return $newSenha;
     }
 }

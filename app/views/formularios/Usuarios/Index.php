@@ -36,7 +36,7 @@
                         </form>
                         </td>
                     <td>
-                        <a href="<?php echo URL_BASE . "usuarios/editar" ?>" class="mx-1 flex-grow-1" style="color:white"><i class="material-icons">edit</i></a>
+                        <a href="<?php echo URL_BASE . "usuarios/editar/" . $usuario->idusuario ?>" class="mx-1 flex-grow-1" style="color:white"><i class="material-icons">edit</i></a>
                     </td>
                     <td>
                         <a href="<?php echo URL_BASE . "usuarios/deletar" ?>"" class="mx-1 flex-grow-1" style="color:white"><i class="material-icons">delete</i></a>

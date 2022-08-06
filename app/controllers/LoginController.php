@@ -15,8 +15,10 @@ class LoginController extends Controller{
     /** Esta função não possui retorno, ou seu retorno é void 
      * @var void */
     public function index(){
-        $dados["view"] = "login";
-        $dados["title"] = "Login necessário";
+        $dados = [
+            "view"=>"login",
+            "title"=>"Login necessário"
+        ];
         $this->load("login", $dados);
     }
     
@@ -28,7 +30,7 @@ class LoginController extends Controller{
      */
     public function logar(){
         
-        $validate = (new Validacao)::validacao([
+        $validate = Validacao::validacao([
             "email" => "required|email|existe:usuarios",
             "senha" => "required"
         ]);
@@ -61,7 +63,7 @@ class LoginController extends Controller{
 
         $cadastrar = new Usuarios;
     
-        $validate = (new Validacao)::validacao([
+        $validate = Validacao::validacao([
             "nome"=>"required",
             "sobrenome"=>"required",
             "email"=>"required|email|unique:usuarios",
@@ -93,7 +95,7 @@ class LoginController extends Controller{
 
     public function recuperarsenha(){
 
-            $validate = (new Validacao)::validacao([
+            $validate = Validacao::validacao([
                 "email" => "required|email|existe:usuarios",
             ]);
             

@@ -13,8 +13,8 @@ class CursosController extends Controller{
 
     public function __construct()
     {   
-        BlockNotLogged::block($this, ['index','cadastrar']);
-        BlockNotAdmin::block($this, ['index','cadastrar']);
+        BlockNotLogged::block($this, ['index','create']);
+        BlockNotAdmin::block($this, ['index','create']);
     }
 
    public function index(){

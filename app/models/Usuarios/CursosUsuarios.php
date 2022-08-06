@@ -54,4 +54,18 @@ class CursosUsuarios extends Model{
         $prepare->execute();
         return $prepare->fetch(PDO::FETCH_OBJ);
     }
+
+    public function coursesByUser($field = [], $fields = "*"){
+        $sql = "SELECT {$fields} FROM {$this->table} WHERE ";
+        foreach($field as $key => $valor){
+            $sql.=$key ."= :".$key . " AND ";
+        }
+        $sql = rtrim($sql , " AND ");
+        $prepare = $this->db->prepare($sql);
+        foreach($field as $key => $valor){
+            $prepare->bindValue(":".$key, $valor);
+        }
+        $prepare->execute();
+        return $prepare->fetch(PDO::FETCH_OBJ);
+    }
 }

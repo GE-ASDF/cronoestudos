@@ -23,7 +23,7 @@
             <li><a class="dropdown-item" href="<?php echo URL_BASE . "cursos" ?>">Cursos</a></li>
             <li><a class="dropdown-item" href="<?php echo URL_BASE . "matriculas" ?>">Matrículas</a></li>
             <li><a class="dropdown-item" href="#">Aulas</a></li>
-            <li><a class="dropdown-item" href="#">Horários</a></li>
+            <li><a class="dropdown-item" href="<?php echo URL_BASE . "horarios" ?>">Horários</a></li>
             <li><a class="dropdown-item" href="<?php echo URL_BASE . "blogcreate" ?>">Blog</a></li>
           </ul>
         </li>
@@ -37,10 +37,10 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link active">Perfil</a>
+          <a href="<?php echo URL_BASE ."perfil/detalhe/" . $_SESSION[SESSION_LOGIN]->idusuario ?>" class="nav-link active">Perfil</a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link active">Grade</a>
+          <a href="<?php echo URL_BASE . "grade"?>" class="nav-link active">Grade</a>
         </li>
         <li class="nav-item">
           <a href="<?php echo URL_BASE . "blog"?>" class="nav-link active">Blog</a>

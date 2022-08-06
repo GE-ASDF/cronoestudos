@@ -10,6 +10,7 @@ use app\classes\BlockNotLogged;
 use app\models\Aulas\Aulasassistidas;
 use app\models\Cursos\Cursosassistidos;
 use app\models\Usuarios\CursosUsuarios;
+use app\models\Usuarios\Usuarios;
 
 class HomeController extends Controller{
 
@@ -25,6 +26,7 @@ class HomeController extends Controller{
         $dados["news"] = (new Blog)->findAll();
         $dados["qtd_aulas_assistidas"] = (array) (new Aulasassistidas)->findBy("idusuario", IDUSUARIO);
         $dados["qtd_cursos_assistidos"] = (array) (new Cursosassistidos)->findBy("idusuario", IDUSUARIO);
+        $dados["usuario"] = (new Usuarios)->findBy("idusuario", $_SESSION[SESSION_LOGIN]->idusuario);
         $dados["cursos"] = ($objCursosUsuario->cursosPorUsuario());
         $dados["qtd_cursos"] = (new CursosUsuarios)->count("idusuario", IDUSUARIO);
         $dados["view"] = "index";
