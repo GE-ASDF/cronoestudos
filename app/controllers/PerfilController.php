@@ -35,7 +35,7 @@ class PerfilController extends Controller{
             "email"=>"required|email|existe:usuarios",
             "nascimento"=>"data",
             "rua"=>"required",
-            "cpf"=>"required|existe:usuarios",
+            "cpf"=>"required|unique:usuarios",
             "numero"=>"required",
             "bairro"=>"required",
             "idestado"=>"required",

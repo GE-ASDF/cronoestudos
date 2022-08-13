@@ -39,7 +39,9 @@ class Grade extends Model{
         {$this->table}.idusuario= :idusuario AND 
         {$this->table}.idcurso = cursos.idcurso AND
         {$this->table}.iddia = dias.iddia AND
-        {$this->table}.idhorario = horarios.idhorario";
+        {$this->table}.idhorario = horarios.idhorario AND
+        horarios.idusuario = :idusuario
+        ORDER BY horarios.horario ASC";
         $query = $this->db->prepare($sql);
         $query->bindValue(":idusuario", IDUSUARIO);
         $query->execute();

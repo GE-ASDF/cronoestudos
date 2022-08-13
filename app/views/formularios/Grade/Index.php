@@ -1,5 +1,5 @@
-
 <section class="container mt-4 mb-4 fadeInDown" data-anime="100">
+    
 <div class="mensagem mb-4 mt-4">
         <?php echo getFlash("message") ?>
     </div>
@@ -55,45 +55,53 @@
     <section class="container-fluid mt-4">
 
         <div class="row">
-        <?php if($dias): ?>
-            <?php foreach($dias as $dia): ?>
+   
+            <?php if($dias): ?>
+                <?php foreach($dias as $dia): ?>
             <div class="col-md p-1 m-1 fs-6 text-center fadeInDown" data-anime="200">
-                <div class="card d-flex justify-content-center align-items-center">
+                <div class="card d-flex">
                     <div class="car-header">
-                        <?php echo $dia->dia ?>
-                    </div> 
-                    <?php if($grade): ?>
-                        <?php foreach($grade as $teste):
-                            if($dia->iddia == $teste->iddia):
-                    ?>
+                       <p><?php echo $dia->dia ?></p>
+                    </div>
+                    
+                    <?php foreach($horarios as $horario): ?>
+                        <section class="d-flex flex-column">                  
+                        <div class="card-body">
+                            <?php echo $horario->horario; ?>
+                        </div>
+                    <!--- INÍCIO DOS CARDS -->
+                    <?php foreach($grade as $agendado): ?>
+                    <?php if($agendado->idhorario == $horario->idhorario && $agendado->iddia == $dia->iddia): ?>
                     <div class="card text-white bg-primary mt-3 mb-3 fadeInDown" data-anime="300" style="max-width: 18rem;">
-                            <div class="card-header">
-                                <h5><?php echo $teste->nome ?></h5>
-                                <span><?php echo $teste->horario ?></span>
-                            </div>
-                            <div class="card-body">
-                            <img class="card-img-top" src="<?php echo URL_BASE ?>upload/<?php echo $teste->foto?>" alt="Card image cap">
-                            <p class="card-text mt-1"><?php echo limitar($teste->descricao, 20, "...") ?></p>
+                        <div class="card-header d-flex flex-column">
+                            <h5><?php echo $agendado->nome ?></h5>
+                        </div>
+                        <div class="card-body">
                             <div class="d-flex">
-                                <a href="<?php echo URL_BASE . "aulas/assistir/" .$teste->idcurso ?>" class="btn btn-success">Ir para o curso</a>
+                                <a href="<?php echo URL_BASE . "aulas/assistir/" . $agendado->idcurso ?>" class="btn btn-success mx-2"><i class="material-icons">play_arrow</i></a>
                                 <form action="<?php echo URL_BASE ."grade/delete" ?>" method="POST" class="d-flex">
-                                <input type="hidden" value="<?php echo $teste->id ?>" name="id">    
+                                <input type="hidden" value="<?php echo $agendado->idhorario ?>" name="idhorario">    
+                                <input type="hidden" value="<?php echo $agendado->idcurso ?>" name="idcurso">    
+                                <input type="hidden" value="<?php echo $agendado->iddia ?>" name="iddia">    
                                 <input type="hidden" value="<?php echo IDUSUARIO ?>" name="idusuario">    
-                                <button class="btn btn-danger">Excluir</button>
+                                <button class="btn btn-danger"><i class="material-icons">delete</i></button>
                             </form>
                         </div>
                         </div>
                     </div>
                     <?php endif; ?>
                     <?php endforeach; ?>
-                    <?php endif; ?>
-                </div>
+                    <!--- FIM DOS CARDS -->
+                </section>                
+                <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
-            
         </div>
+        <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
     
     </section>
 
 </section>
+
+

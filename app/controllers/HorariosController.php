@@ -33,11 +33,14 @@ class HorariosController extends Controller{
        }
 
        if(!$jaCadastrado){
-            for($i = 0; $i < count($validate["horario"]); $i++){
+           for($i = 0; $i < count($validate["horario"]); $i++){
+               $a = 1;
                 $validado = [
                     "idusuario"=>$validate["idusuario"],
+                    "idhorario"=> $a + $i,
                     "horario"=>$validate["horario"][$i]
                 ];
+                
                 $created = $objHorarios->create($validado);
             }
        }

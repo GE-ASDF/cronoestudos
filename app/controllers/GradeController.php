@@ -87,14 +87,18 @@ class GradeController extends Controller{
 
             $validate = Validacao::validacao([
                 "idusuario"=>"required",
-                "id"=>"required",
+                "idhorario"=>"required",
+                "iddia"=>"required",
+                "idcurso"=>"required"
             ]);
+
             if($validate["idusuario"] != IDUSUARIO){
                 redirect(URL_BASE."notallowed");
                 die();
             }
-            $cadastrado = $objGrade->findBy(["id"=>$validate["id"], "idusuario"=>$validate["idusuario"]]);
-
+            $cadastrado = $objGrade->findBy(["idhorario"=>$validate["idhorario"], 
+            "idusuario"=>$validate["idusuario"], "iddia"=>$validate["iddia"], "idcurso"=>$validate["idcurso"]]);
+       
             if($cadastrado->idusuario !== IDUSUARIO){
                 redirect(URL_BASE."notallowed");
                 die();

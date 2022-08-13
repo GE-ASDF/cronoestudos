@@ -1,4 +1,4 @@
-<section class="container" style="overflow:hidden">
+<section id="horarios" class="container" style="overflow:hidden">
     <div class="mensagem mb-4 mt-4">
         <?php echo getFlash("message") ?>
     </div>
@@ -6,11 +6,11 @@
         <div class="row">
         <div class="col-md-4">
             <label for="inicio">Horário de início</label>
-            <input type="text" name="inicio" class="form-control">
+            <input v-model.number="inicio" type="text" name="inicio" class="form-control">
         </div>
         <div class="col-md-4">
             <label for="fim">Qtd. ciclos</label>
-            <input type="text" name="fim" class="form-control">
+            <input v-model.number="fim" type="text" name="fim" class="form-control">
         </div>
         <div class="col-md-4">
             <label for="fim">A cada</label>
@@ -46,5 +46,14 @@
                 </form>
             </div>
         </section>
+        <script>
+            const vm = new Vue({
+                el:"#horarios",
+                data:{
+                    inicio:0,
+                    fim:0,
+                }
+            })
+        </script>
         <script src="<?php echo URL_BASE ?>app/views/assets/createschedules/minutos.js"></script>
         <script src="<?php echo URL_BASE ?>app/views/assets/createschedules/horarios.js"></script>

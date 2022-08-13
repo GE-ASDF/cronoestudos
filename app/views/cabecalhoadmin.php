@@ -22,7 +22,7 @@
             <li><a class="dropdown-item" href="<?php echo URL_BASE ."usuarios" ?>">Usuários</a></li>
             <li><a class="dropdown-item" href="<?php echo URL_BASE . "cursos" ?>">Cursos</a></li>
             <li><a class="dropdown-item" href="<?php echo URL_BASE . "matriculas" ?>">Matrículas</a></li>
-            <li><a class="dropdown-item" href="#">Aulas</a></li>
+            <li><a class="dropdown-item" href="<?php echo URL_BASE . "cadastraraulas" ?>">Aulas</a></li>
             <li><a class="dropdown-item" href="<?php echo URL_BASE . "horarios" ?>">Horários</a></li>
             <li><a class="dropdown-item" href="<?php echo URL_BASE . "blogcreate" ?>">Blog</a></li>
           </ul>

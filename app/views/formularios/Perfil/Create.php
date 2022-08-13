@@ -26,8 +26,8 @@
 
             <div class="form-group mb-2">
                 <label for="nome" class="text form-label">Nome</label>
-                <input type="text" id="nome" value="<?php echo $usuario->nome?>" class="form-control" name="nome">
-                <input type="hidden" id="nome" value="<?php echo $usuario->idusuario?>" class="form-control" name="idusuario">
+                <input type="text" id="nome" value="<?php echo $usuario->nome ?>" class="form-control" name="nome">
+                <input type="hidden" id="nome" value="<?php echo $usuario->idusuario ?>" class="form-control" name="idusuario">
 
                 <?php echo getFlash("nome") ?>
             </div>

@@ -1,4 +1,4 @@
-<section class="container mt-4">
+<section id="usuarios" class="container mt-4">
 
     <h2 class="title fs-2">Cadastro de usuários</h2>
     <span class="mb-4 mt-4">
@@ -13,7 +13,7 @@
             </div>
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="form-group">
-                    <input type="file" name="foto" value="<?php echo getOld("foto") ?>" class="form-control" id="foto">
+                    <input @change="selectInput" type="file" name="foto" value="<?php echo getOld("foto") ?>" class="form-control" id="foto">
                 </div>
             </div>
             <?php echo getFlash("foto") ?>
@@ -174,19 +174,30 @@
     </form>
 
 </section>
-
+  <script>
+            const vm = new Vue({
+                el:"#usuarios",
+                data:{
+                    inicio:0,
+                    fim:0,
+                },
+                methods:{
+                    selectInput(){
+                        let imgInput = document.querySelector("#foto");
+                        let imagemPerfil = document.querySelector("#imagem-perfil")
+                        this.renderFile(imgInput, imagemPerfil);
+                    },
+                    renderFile(imgInput, imagemPerfil){
+                        let reader = new FileReader();
+                            reader.onload = function(){
+                            imagemPerfil.src = reader.result;
+                            }
+                        reader.readAsDataURL(imgInput.files[0])
+                    },
+                }
+            })
+    </script>
 <script>
-
-    let imgInput = document.querySelector("#foto");
-    let imagemPerfil = document.querySelector("#imagem-perfil");
-    
-    imgInput.addEventListener("change", function(e){
-        let reader = new FileReader();
-        reader.onload = function(){
-            imagemPerfil.src = reader.result;
-        }
-        reader.readAsDataURL(imgInput.files[0])
-    })
     
     window.onload = function(){
         let idestado = document.querySelector("#idestado");

@@ -3,6 +3,7 @@ namespace app\models\Horarios;
 
 use PDO;
 use app\core\Model;
+use app\models\Dias\Dias;
 
 class Horarios extends Model{
 
@@ -22,6 +23,15 @@ class Horarios extends Model{
             $field=>$value,
         ]);
         return $prepare->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function findBy2($field, $value, $fields = "*"){
+        $sql = "SELECT {$fields} FROM {$this->table} WHERE {$field} = :{$field}";
+        $prepare = $this->db->prepare($sql);
+        $prepare->execute([
+            $field=>$value,
+        ]);
+        return $prepare->fetch(PDO::FETCH_OBJ);
     }
 
     public function create($dados){
@@ -49,5 +59,20 @@ class Horarios extends Model{
         $prepare->execute();
         return $prepare->rowCount();
     }
-
+    public function teste(){
+        $dias = (new Dias)->findAll();
+        $lista = array();
+        foreach($dias as $key => $dia){
+            $horarios = $this->findBy("idusuario", IDUSUARIO);
+            foreach($horarios as $horario){
+                $lista[] = ([
+                    "iddia"=>$dia->iddia,
+                    "dia"=>$dia->dia,
+                    "idhorario"=>$horario->idhorario,
+                    "horario"=>$horario->horario,
+                ]);
+            } 
+        }
+        return $lista;   
+    }
 }
