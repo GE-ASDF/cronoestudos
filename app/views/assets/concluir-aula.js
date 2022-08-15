@@ -5,7 +5,8 @@ window.onload = function(){
     atualizador.forEach(formulario=>{
         formulario.addEventListener("submit", function(e){
             e.preventDefault();
-            let idaula = formulario.querySelector("input").value;
+            let idaula = formulario.querySelector("input[name='idaula']").value;
+            let idcurso = formulario.querySelector("input[name='idcurso']").value;
             xmlHttpGet("../concluiraula", function(){
                 beforeSend(function(){
                 });
@@ -28,7 +29,7 @@ window.onload = function(){
                     }
 
                 })
-            }, "?idaula="+idaula)
+            }, "?idaula="+idaula+"&idcurso="+idcurso)
     })
     })
 }

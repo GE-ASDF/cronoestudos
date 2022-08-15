@@ -33,7 +33,8 @@ class AulasController extends Controller{
 
     public function assistir($idcurso = null){
         $matriculado = (new Matriculas)->findTeste(IDUSUARIO, $idcurso);
-        if($matriculado){
+        $cursoExiste = (new Cursos)->findBy("idcurso", $idcurso);
+        if($matriculado && $cursoExiste){
             $dados["curso"] = (new Cursos)->findBy("idcurso", $idcurso);
             $dados["professores"] = (new Professores)->findAll();
             $dados["qtdAulas"] = (new Aulas)->findBy("idcurso", $idcurso);
@@ -51,13 +52,14 @@ class AulasController extends Controller{
     public function concluirAula($idaula = null){
         
         $idaula = strip_tags($_GET["idaula"]);
-
+        $idcurso = strip_tags($_GET["idcurso"]);
+        
         if(!$idaula){
             echo json_encode(0);
         }
 
         if($idaula){
-            $concluido = (new Aulasassistidas)->concluirAula($idaula);
+            $concluido = (new Aulasassistidas)->concluirAula($idaula, $idcurso);
             if($concluido){
                 echo json_encode(1);
             }else{

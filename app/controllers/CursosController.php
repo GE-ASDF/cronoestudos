@@ -32,6 +32,7 @@ class CursosController extends Controller{
         "nome" => "required",
         "professor" => "required",
         "descricao"=>"required",
+        "questoes"=>"required",
         "foto"=>"image",
         "datacadastro" => "data"
     ]);

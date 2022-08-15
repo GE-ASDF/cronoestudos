@@ -20,7 +20,7 @@
     <div class="container-fluid">
 
 
-        <header>
+        <header class="bg-primary">
         
             <?php
                 if(NIVEL != 1){

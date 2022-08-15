@@ -1,5 +1,5 @@
 <section class="container mt-4 mb-4 fadeInDown" data-anime="100">
-    
+
 <div class="mensagem mb-4 mt-4">
         <?php echo getFlash("message") ?>
     </div>
@@ -52,7 +52,7 @@
     </div>
 </section>
 
-    <section class="container-fluid mt-4">
+    <section id="desktop" class="container-fluid mt-4">
 
         <div class="row">
    
@@ -61,18 +61,90 @@
             <div class="col-md p-1 m-1 fs-6 text-center fadeInDown" data-anime="200">
                 <div class="card d-flex">
                     <div class="car-header">
-                       <p><?php echo $dia->dia ?></p>
+                    <p>
+                        <?php echo $dia->dia; ?>
+                    </p>
                     </div>
                     
                     <?php foreach($horarios as $horario): ?>
                         <section class="d-flex flex-column">                  
-                        <div class="card-body">
-                            <?php echo $horario->horario; ?>
-                        </div>
+                      
+                            <p style="width:100%">
+                                <?php echo $horario->horario; ?>
+                            </p>
+                        
                     <!--- INÍCIO DOS CARDS -->
                     <?php foreach($grade as $agendado): ?>
                     <?php if($agendado->idhorario == $horario->idhorario && $agendado->iddia == $dia->iddia): ?>
-                    <div class="card text-white bg-primary mt-3 mb-3 fadeInDown" data-anime="300" style="max-width: 18rem;">
+                    <div class="mb-4 card text-white bg-primary fadeInDown" data-anime="300" style="max-width: 18rem;">
+                        <div class="card-header d-flex flex-column">
+                            <h5><?php echo $agendado->nome ?></h5>
+                        </div>          
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <a href="<?php echo URL_BASE . "aulas/assistir/" . $agendado->idcurso ?>" class="btn btn-success mx-2"><i class="material-icons">play_arrow</i></a>
+                                <form action="<?php echo URL_BASE ."grade/delete" ?>" method="POST" class="d-flex">
+                                <input type="hidden" value="<?php echo $agendado->idhorario ?>" name="idhorario">    
+                                <input type="hidden" value="<?php echo $agendado->idcurso ?>" name="idcurso">    
+                                <input type="hidden" value="<?php echo $agendado->iddia ?>" name="iddia">    
+                                <input type="hidden" value="<?php echo IDUSUARIO ?>" name="idusuario">    
+                                <button class="btn btn-danger"><i class="material-icons">delete</i></button>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                    <?php endforeach; ?>
+                    <!--- FIM DOS CARDS -->
+                </section>                
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+    
+    </section>
+    <style>
+        #mobile{
+            display: none;
+        }
+        @media(max-width:680px){
+            #desktop{
+                display: none;
+            }
+            #mobile{
+                display: block;
+            }
+        }
+    </style>
+    <section id="mobile" class="container-fluid mt-4">
+
+        <div class="row">
+   
+            <?php if($dias): ?>
+                <?php foreach($dias as $dia): ?>
+            <div class="col-md p-1 m-1 fs-6 text-center fadeInDown" data-anime="200">
+                <div class="card d-flex">
+                    <div class="car-header">
+                    <p>
+                        <button style="display:block; width:100%" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#n-<?php echo $dia->iddia ?>" aria-expanded="false" aria-controls="collapseExample">
+                            <?php echo $dia->dia; ?>
+                        </button>
+                    </p>
+                    </div>
+                    
+                    <?php foreach($horarios as $horario): ?>
+                        <section class="d-flex flex-column">                  
+                      
+                    <!--- INÍCIO DOS CARDS -->
+                    <?php foreach($grade as $agendado): ?>
+                        
+                    <?php if($agendado->idhorario == $horario->idhorario && $agendado->iddia == $dia->iddia): ?>
+                    <div id="n-<?php echo $dia->iddia ?>"  class="collapse mb-4 card text-white bg-primary fadeInDown" data-anime="300" style="max-width: 18rem;">
+                        <p style="width:100%">
+                            <?php echo $horario->horario; ?>
+                        </p>
                         <div class="card-header d-flex flex-column">
                             <h5><?php echo $agendado->nome ?></h5>
                         </div>
@@ -103,5 +175,3 @@
     </section>
 
 </section>
-
-

@@ -63,17 +63,18 @@ class Aulasassistidas extends Model{
         }
         return $lista;
     }
-    public function concluirAula($idaula){
+    public function concluirAula($idaula, $idcurso){
         
         $jaConcluiu = $this->findByUser("idaula", $idaula, IDUSUARIO);
 
         if($jaConcluiu){
             $sql = "DELETE FROM {$this->table}
-            WHERE idusuario = :idusuario AND idaula= :idaula
+            WHERE idusuario = :idusuario AND idaula= :idaula AND idcurso = :idcurso
             ";
             $prepare = $this->db->prepare($sql);
             $prepare->bindValue(":idusuario", IDUSUARIO);
             $prepare->bindValue(":idaula", $idaula);
+            $prepare->bindValue(":idcurso", $idcurso);
             $deletado = $prepare->execute();
             var_dump($deletado);
             die();
@@ -82,12 +83,14 @@ class Aulasassistidas extends Model{
             $sql = "INSERT INTO {$this->table} SET
             idaula= :idaula,
             idusuario= :idusuario,
+            idcurso= :idcurso,
             data_assistida = :data,
             hora_assistida= :hora
         ";
         $prepare = $this->db->prepare($sql);
         $prepare->bindValue(":idaula", $idaula);
         $prepare->bindValue(":idusuario", IDUSUARIO);
+        $prepare->bindValue(":idcurso", $idcurso);
         $prepare->bindValue(":data", date("Y-m-d"));
         $prepare->bindValue(":hora", date("H:i:s"));
         $concluida = $prepare->execute();

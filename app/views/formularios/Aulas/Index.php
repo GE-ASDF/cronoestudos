@@ -10,7 +10,7 @@
         }
     }
 ?>
-    <div class="col-md-3 bg-light p-2 ">
+    <div class="col-md-3 p-2 ">
         <div class="title">
             <h4><?php echo $curso->nome ?></h4>
             <h5>Professor: <?php filtrarProfessor($professores, $curso) ?></h5>
@@ -28,6 +28,14 @@
                 </div>
             </div>
         </div>
+        <?php if($curso->questoes): ?>
+        <div class="d-grid mt-4">
+            <a target="_blank" href="<?php echo $curso->questoes ?>" class="btn btn-success">Caderno de questões</a>
+        </div>
+        <?php endif; ?>
+        <div class="mt-4 curso-information">
+            <p><?php echo $curso->descricao ?></p>
+        </div>
     </div>
 
     <?php if($aulas): ?>
@@ -43,6 +51,7 @@
                     <form class="concluir-aula">
                         <label for="concluir-<?php echo $aula["idaula"] ?>">Concluir aula</label>
                         <input type="hidden" name="idaula" value="<?php echo $aula["idaula"] ?>">
+                        <input type="hidden" name="idcurso" value="<?php echo $curso->idcurso ?>">
                         <button id="concluir-<?php echo $aula["idaula"] ?>" style="border:none;outline:none" class="btn">
                         <i class='material-icons'><?php echo $aula["assistiu"] ? "check":"check_box_outline_blank" ?></i>
                         </button>

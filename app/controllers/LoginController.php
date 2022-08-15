@@ -107,7 +107,6 @@ class LoginController extends Controller{
             if($validate){ 
                 $objUsuario = new Usuarios;
                 $usuario = $objUsuario->findBy(field:"email", value:$validate["email"]);
-
             if($usuario){            
                 echo json_encode(1);
             }else{

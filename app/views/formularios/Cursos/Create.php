@@ -37,6 +37,11 @@
     <label for="descricao">obrigatório. Use \n para quebra de parágrafos.</label>
 </div>
 <div class="form-group mt-4">
+    <label for="questoes">Link do caderno de questões</label>
+    <input name="questoes" type="text" class="form-control" id="questoes">
+    <?php echo getFlash("questoes") ?>
+</div>
+<div class="form-group mt-4">
     <label for="foto">Imagem</label>
     <input name="foto" type="file" class="form-control-file" id="foto">
     <?php echo getFlash("foto") ?>

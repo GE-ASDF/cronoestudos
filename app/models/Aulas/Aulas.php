@@ -36,5 +36,7 @@ class Aulas extends Model{
         return $cadastrado;
     }
 
-
+    public function get(){
+        
+    }
 }

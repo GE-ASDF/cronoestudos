@@ -6,6 +6,8 @@ use app\models\Dias\Dias;
 use app\classes\Validacao;
 use app\models\Grade\Grade;
 use app\classes\BlockNotLogged;
+use app\models\Aulas\Aulas;
+use app\models\Aulas\Aulasassistidas;
 use app\models\Horarios\Horarios;
 use app\models\Usuarios\CursosUsuarios;
 
@@ -17,6 +19,7 @@ class GradeController extends Controller{
     }
 
     public function index(){
+        $objAulas = new Aulasassistidas;
         $dados = [
             "grade"=>(new Grade)->grade(),
             "cursos" => (new CursosUsuarios)->cursosPorUsuario(),
@@ -24,6 +27,7 @@ class GradeController extends Controller{
             "horarios"=> (new Horarios)->findBy("idusuario", IDUSUARIO), 
             "title"=>"Grade de horários",
             "view"=>"formularios/Grade/Index",
+            "aulas" => $objAulas->findBy("idusuario", IDUSUARIO),
         ];       
         $this->load("template", $dados);
     }

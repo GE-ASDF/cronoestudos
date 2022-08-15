@@ -8,7 +8,7 @@ window.onload = function(){
 
     formRecuperar.onsubmit = function(e){
         e.preventDefault();
-        var recuperar = new FormData(formRecuperar);
+        let recuperar = new FormData(formRecuperar);
         xmlHttpPost("login/recuperarsenha", function(){
             beforeSend(function(){
                 mensagem[1].innerHTML = `<span class="alert alert-success"> Carregando </span>`
@@ -16,13 +16,9 @@ window.onload = function(){
             success(function(){
 
                 let response = xhttp.responseText;
-
+                console.log(response);
                 if(response == 1){
                     mensagem[1].innerHTML = `<span class="alert alert-success"> Senha recuperada. Verifique seu e-mail </span>`
-                   let allInputs = formRecuperar.querySelectorAll("input.form-control")
-                    Array.from(allInputs).forEach(input=>{
-                        input.value = '';
-                    })
                     let closeModal = formRecuperar.querySelector(".close-modal")
                     setTimeout(() => {
                         closeModal.click();
@@ -37,7 +33,7 @@ window.onload = function(){
 
     formCadastrar.onsubmit = function(e){
         e.preventDefault();
-        var cadastrar = new FormData(formCadastrar);
+        let cadastrar = new FormData(formCadastrar);
         xmlHttpPost("login/cadastrar", function(){
             beforeSend(function(){
                 mensagem[0].innerHTML = `<span class="alert alert-success"> Carregando </span>`

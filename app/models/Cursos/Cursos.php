@@ -2,7 +2,10 @@
 namespace app\models\Cursos;
 
 use app\core\Model;
+use app\models\Aulas\Aulas;
+use app\models\Professores\Professores;
 use PDO;
+use Throwable;
 
 class Cursos extends Model{
 
@@ -70,5 +73,34 @@ class Cursos extends Model{
 
         $cadastrado = $prepare->execute();
         return $cadastrado;
+    }
+    public function get($id = null){
+        try{  
+        if($id){
+            $curso =  $this->findBy("idcurso", $id);
+            if($curso){
+
+                $aulas = (new Aulas)->findBy("idcurso", $id);
+                $prof = $curso->professor;
+                $professor = (new Professores)->findBy("idprofessor", $prof);
+                $curso->professor = $professor->nome;
+                foreach($aulas as $aula){
+                    $nome[] = $aula->nome;
+                }
+                $retorno = [
+                    "Curso"=>$curso,
+                    "Aulas"=>$nome,
+                ];
+                return $retorno;
+            }else{
+                die("Desculpe, mas este curso não foi encontrado no nosso banco de dados.");
+            }
+        }else{
+            return $this->findAll();
+        }
+        }catch(Throwable $e){
+            die($e->getMessage());
+        }
+
     }
 }
